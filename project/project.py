@@ -28,6 +28,7 @@ def youtube(url):
     vid = extract_video(video)
     print(vid)
     aud = extract_audio(audio)
+    print(aud)
     
     
     
@@ -47,10 +48,15 @@ def extract_audio(audio):
     streams = {}
     for i in audio:
         print(i)
-        aud = re.search = r'^\[?<Stream: itag="(.{3})" mime_type="audio/(?:mp4|webm)" abr="(128|160)kbps" acodec="(?:opus|mp4a.40.(?:2|5))" progressive="False" type="audio">\]?$' 
-        print(aud)
+        aud = re.search(r'^\[?<Stream: itag="(.{3})" mime_type="audio/(?:mp4|webm)" abr="(128|160)kbps" acodec="(?:opus|mp4a.40.(?:2|5))" progressive="False" type="audio">\]?$', i, re.IGNORECASE) 
+        try:
+            if aud[2]:
+                streams[aud[1]] = aud[2]
+        except:
+            continue
         
     return max(streams)
+
 if __name__ == "__main__":
     main()
     
