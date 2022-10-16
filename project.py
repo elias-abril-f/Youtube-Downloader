@@ -10,14 +10,15 @@ from pytube import YouTube
 def main():
     url = f"https://youtu.be/{userIn()}"
     title, vidFormat, audFormat = youtube(url)
-    combine(title, vidFormat, audFormat)
+    result = combine(title, vidFormat, audFormat)
+    print(result)
 
     
 def combine(title, vidFormat, audFormat):
     input_video = ffmpeg.input(f"test/video/{title}.{vidFormat}")
     input_audio = ffmpeg.input(f"test/audio/{title}.{audFormat}")
     ffmpeg.concat(input_video, input_audio, v=1, a=1).output(f"{title}.mp4").run()
-
+    return "Cool beans"
 
 def userIn():
     while True:
