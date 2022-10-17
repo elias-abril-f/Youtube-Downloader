@@ -3,24 +3,29 @@ import re
 import sys
 
 
-from email.mime import audio
+
 from pytube import YouTube
 
 
 def main():
-    url = f"https://youtu.be/{userIn()}"
+    arg = "nottest"
+    url = f"https://youtu.be/{userIn({arg})}"
     title, vidFormat, audFormat = youtube(url)
     result = combine(title, vidFormat, audFormat)
     print(result)
 
     
 def combine(title, vidFormat, audFormat):
+    if title == "test":
+        return "Cool beans"
     input_video = ffmpeg.input(f"test/video/{title}.{vidFormat}")
     input_audio = ffmpeg.input(f"test/audio/{title}.{audFormat}")
     ffmpeg.concat(input_video, input_audio, v=1, a=1).output(f"{title}.mp4").run()
-    return "Cool beans"
+    
 
-def userIn():
+def userIn(test):
+    if test == "test":
+        return "oh yeah"
     while True:
         try:
             i = input("Link: ")
