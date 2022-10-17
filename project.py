@@ -3,7 +3,6 @@ import re
 import sys
 
 
-
 from pytube import YouTube
 
 
@@ -11,8 +10,7 @@ def main():
     arg = "nottest"
     url = f"https://youtu.be/{userIn({arg})}"
     title, vidFormat, audFormat = youtube(url)
-    result = combine(title, vidFormat, audFormat)
-    print(result)
+    combine(title, vidFormat, audFormat)
 
     
 def combine(title, vidFormat, audFormat):
